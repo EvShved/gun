@@ -1,6 +1,4 @@
-require 'colored'
-require 'rubocop'
-#while true
+while true
 
     #open file shoot.txt
 
@@ -189,6 +187,6 @@ require 'rubocop'
         puts "\e[H\e[2J"
         puts lines
         sleep(0.5)
-#end
+end
 
 
