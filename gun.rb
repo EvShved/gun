@@ -1,12 +1,14 @@
 class Gun
   def initialize
     @guns = File.open('shoot.txt').read.split("\n")
+    @wall = File.open('wall.txt').read.split("\n")
   end
 
   def process
     gun_writer
     add_wick
     add_core
+    wall_writer
   end
 
   private
@@ -18,6 +20,11 @@ class Gun
   def gun_writer
     clean_screen
     puts @guns
+  end
+
+  def wall_writer
+    clean_screen
+    puts @wall
   end
 
   def wick(x, y)
