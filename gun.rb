@@ -7,8 +7,9 @@ class Gun
   def process
     gun_writer
     add_wick
-    add_core
+    add_core_stage_one
     wall_writer
+    add_core_stage_two
   end
 
   private
@@ -44,7 +45,7 @@ class Gun
     sleep(x)
   end
 
-  def core(x, y1 ,y2 , symbol)
+  def core_stage_one(x, y1 ,y2 , symbol)
     @guns[x][y1..y2] = symbol*6
     @guns[x + 1][y1 - 2..y2 + 2] = symbol*10
     @guns[x + 2][y1 - 3..y2 + 3] = symbol*12
@@ -53,11 +54,28 @@ class Gun
     gun_writer
   end
 
-  def add_core
+  def add_core_stage_one
     (60..110).to_a.each do |elem|
-      core(4, elem, elem+5, 'Z')
+      core_stage_one(4, elem, elem+5, 'Z')
       wait(0.01)
-      core(4, elem, elem+5, '-')
+      core_stage_one(4, elem, elem+5, '-')
+    end
+  end
+
+  def core_stage_two(x, y1 ,y2 , symbol)
+    @wall[x][y1..y2] = symbol*6
+    @wall[x + 1][y1 - 2..y2 + 2] = symbol*10
+    @wall[x + 2][y1 - 3..y2 + 3] = symbol*12
+    @wall[x + 3][y1 - 2..y2 + 2] = symbol*10
+    @wall[x + 4][y1..y2] = symbol*6
+    wall_writer
+  end
+
+  def add_core_stage_two
+    (5..52).to_a.each do |elem|
+      core_stage_two(4, elem, elem+5, 'Z')
+      wait(0.01)
+      core_stage_two(4, elem, elem+5, ' ')
     end
   end
 end
