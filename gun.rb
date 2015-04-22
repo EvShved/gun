@@ -2,6 +2,9 @@ class Gun
   def initialize
     @guns = File.open('shoot.txt').read.split("\n")
     @wall = File.open('wall.txt').read.split("\n")
+    @boom_1 = File.open('boom_stage_1.txt').read.split("\n")
+    @boom_2 = File.open('boom_stage_2.txt').read.split("\n")
+    @boom_3 = File.open('boom_stage_3.txt').read.split("\n")
   end
 
   def process
@@ -10,6 +13,7 @@ class Gun
     add_core_stage_one
     wall_writer
     add_core_stage_two
+    cut_scene_writer
   end
 
   private
@@ -26,6 +30,22 @@ class Gun
   def wall_writer
     clean_screen
     puts @wall
+  end
+
+  def cut_scene_writer
+    clean_screen
+    cut_scene
+  end
+
+  def cut_scene
+    puts @boom_1
+    wait(0.5)
+    clean_screen
+    puts @boom_2
+    wait(0.5)
+    clean_screen
+    puts @boom_3
+    wait(1)
   end
 
   def wick(x, y)
@@ -78,6 +98,7 @@ class Gun
       core_stage_two(4, elem, elem+5, ' ')
     end
   end
+
 end
 
 gun = Gun.new
